@@ -1,9 +1,49 @@
-import example.pepita
+import example.*
 
-describe "group of tests for pepita" {
+describe "test de rodados" {
 
-  test "pepita has initial energy" {
-    assert.equals(100, pepita.energy())
+  const deportes = new Dependencia(empleados=45)
+  const cultura = new Dependencia(empleados=31)
+  const cachito = new Corsa(color ="rojo")
+  const unaTrafic = new Trafic()
+
+  method initialize(){
+    deportes.agregarAFlota(cachito)
+    deportes.agregarAFlota(new Corsa(color ="azul"))
+    deportes.agregarAFlota(new Corsa(color ="verde"))
+    deportes.agregarAFlota(new Kwid(tieneGas = true))
+    deportes.agregarAFlota(new Especial(pasajeros = 5, velocidad = 160, peso = 1200, color = "beige"))
+    cultura.agregarAFlota(cachito)
+    cultura.agregarAFlota(new Kwid(tieneGas = true))
+    cultura.agregarAFlota(new Kwid(tieneGas = true))
+    cultura.agregarAFlota(new Kwid())
+    unaTrafic.cambiarInterior(popular)
+    unaTrafic.cambiarMotor(bataton)
+    cultura.agregarAFlota(unaTrafic)
   }
 
+  test "peso total de la flota deportes"{
+    assert.equals(6450, deportes.pesoTotalFlota())
+  }
+    test "peso total de la flota cultura"{
+    assert.equals(7100, cultura.pesoTotalFlota())
+  }
+  test "deportes esta bien equipada"{
+    assert.that(deportes.estaBienEquipada())
+  }
+   test "cultura no esta bien equipada"{
+    assert.notThat(cultura.estaBienEquipada())
+  }
+  test "capacidad en color azul"{
+    assert.equals(7, deportes.capacidadTotalEnColor("azul"))
+  }
+  test "beige es el color de rodado mas rapido"{
+    assert.equals("beige", deportes.colorDelRodadoMasRapido())
+  }
+  test "deporte es grande"{
+    assert.that(deportes.esGrande())
+  }
+  test "capacidad faltante 45 - 20"{
+    assert.equals(45 - 20, deportes.capacidadFaltante())
+  }
 }
